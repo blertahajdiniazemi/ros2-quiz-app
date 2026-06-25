@@ -1,0 +1,222 @@
+[
+  {
+    "q": "What is the main purpose of this ROS 2 program?",
+    "answers": [
+      "Receive messages from a topic",
+      "Send messages to a topic",
+      "Compile ROS 2",
+      "Create a robot"
+    ],
+    "correct": 0,
+    "explanation": "The program creates a subscription, so its job is to receive messages from the 'chatter' topic."
+  },
+  {
+    "q": "Why does SimpleSubscriber inherit from rclcpp::Node?",
+    "answers": [
+      "To become a ROS 2 node with ROS features",
+      "To publish automatically",
+      "To increase program speed",
+      "To create topics automatically"
+    ],
+    "correct": 0,
+    "explanation": "A ROS 2 node provides functions like create_subscription(), get_logger(), and parameters."
+  },
+  {
+    "q": "Why is rclcpp::init() called before creating the node?",
+    "answers": [
+      "It starts the ROS 2 communication system",
+      "It creates the callback",
+      "It sends the first message",
+      "It shuts down ROS 2"
+    ],
+    "correct": 0,
+    "explanation": "ROS 2 must be initialized before any node can communicate."
+  },
+  {
+    "q": "What does std::make_shared<SimpleSubscriber>() create?",
+    "answers": [
+      "A subscriber node object",
+      "A publisher",
+      "A topic",
+      "A message"
+    ],
+    "correct": 0,
+    "explanation": "It creates an instance of the SimpleSubscriber node managed by a shared pointer."
+  },
+  {
+    "q": "What happens when the constructor of SimpleSubscriber runs?",
+    "answers": [
+      "The node is named and the subscription is created",
+      "The callback executes immediately",
+      "The program shuts down",
+      "Messages are published"
+    ],
+    "correct": 0,
+    "explanation": "The constructor initializes the node and registers the subscription."
+  },
+  {
+    "q": "What is the purpose of create_subscription()?",
+    "answers": [
+      "Tell ROS 2 to listen for messages on a topic",
+      "Create a publisher",
+      "Create a node",
+      "Print messages"
+    ],
+    "correct": 0,
+    "explanation": "It registers this node as a subscriber to a topic."
+  },
+  {
+    "q": "Why does the subscriber specify std_msgs::msg::String?",
+    "answers": [
+      "It tells ROS 2 what type of message to expect",
+      "It names the topic",
+      "It creates the callback",
+      "It stores the queue"
+    ],
+    "correct": 0,
+    "explanation": "Both publisher and subscriber must use the same message type."
+  },
+  {
+    "q": "What is the meaning of the topic name 'chatter'?",
+    "answers": [
+      "The communication channel for messages",
+      "The node name",
+      "The callback name",
+      "The queue name"
+    ],
+    "correct": 0,
+    "explanation": "Topics are named channels that connect publishers and subscribers."
+  },
+  {
+    "q": "What does the queue size 10 mean?",
+    "answers": [
+      "ROS 2 can temporarily store up to 10 incoming messages",
+      "The callback runs 10 times",
+      "There are 10 subscribers",
+      "Messages must contain 10 characters"
+    ],
+    "correct": 0,
+    "explanation": "The queue buffers messages if they arrive faster than they can be processed."
+  },
+  {
+    "q": "Why is std::bind() used?",
+    "answers": [
+      "To connect the callback function with the subscriber object",
+      "To create a topic",
+      "To create messages",
+      "To stop the callback"
+    ],
+    "correct": 0,
+    "explanation": "ROS 2 needs to know which function to call and which object owns that function."
+  },
+  {
+    "q": "What does _1 mean in std::bind()?",
+    "answers": [
+      "The first argument passed to the callback",
+      "The first topic",
+      "The first subscriber",
+      "The queue size"
+    ],
+    "correct": 0,
+    "explanation": "_1 is a placeholder representing the incoming message."
+  },
+  {
+    "q": "Who calls msgCallback()?",
+    "answers": [
+      "ROS 2 automatically when a message arrives",
+      "The programmer inside main()",
+      "The compiler",
+      "The logger"
+    ],
+    "correct": 0,
+    "explanation": "Callbacks are triggered automatically by ROS 2."
+  },
+  {
+    "q": "What does rclcpp::spin(node) do?",
+    "answers": [
+      "Keeps the node running and waiting for messages",
+      "Publishes messages",
+      "Creates topics",
+      "Compiles the node"
+    ],
+    "correct": 0,
+    "explanation": "spin() runs the event loop so callbacks can execute."
+  },
+  {
+    "q": "What would happen if spin() were removed?",
+    "answers": [
+      "The program would end before receiving messages",
+      "The callback would run forever",
+      "The node would become a publisher",
+      "Nothing would change"
+    ],
+    "correct": 0,
+    "explanation": "Without spin(), the node never waits for incoming messages."
+  },
+  {
+    "q": "What does msg.data contain?",
+    "answers": [
+      "The text sent by the publisher",
+      "The topic name",
+      "The node name",
+      "The queue size"
+    ],
+    "correct": 0,
+    "explanation": "The data field stores the actual String message."
+  },
+  {
+    "q": "Why is RCLCPP_INFO_STREAM() used?",
+    "answers": [
+      "To display information in the terminal",
+      "To publish a message",
+      "To create a topic",
+      "To stop ROS 2"
+    ],
+    "correct": 0,
+    "explanation": "It logs information using the node's logger."
+  },
+  {
+    "q": "Why is the subscription stored in sub_?",
+    "answers": [
+      "To keep the subscription alive while the node exists",
+      "To make the callback faster",
+      "To create another topic",
+      "To store received messages forever"
+    ],
+    "correct": 0,
+    "explanation": "If it were a local variable, it would be destroyed after the constructor."
+  },
+  {
+    "q": "If no publisher is sending messages on chatter, what does the subscriber do?",
+    "answers": [
+      "It waits for messages",
+      "It crashes",
+      "It publishes messages",
+      "It exits immediately"
+    ],
+    "correct": 0,
+    "explanation": "Subscribers can wait even if no publisher exists."
+  },
+  {
+    "q": "What does rclcpp::shutdown() do?",
+    "answers": [
+      "Closes ROS 2 communication cleanly",
+      "Creates a new node",
+      "Starts the callback",
+      "Creates a publisher"
+    ],
+    "correct": 0,
+    "explanation": "shutdown() releases ROS 2 resources before the program exits."
+  },
+  {
+    "q": "Which sequence correctly describes this program?",
+    "answers": [
+      "Initialize ROS 2 → Create node → Create subscription → Spin → Receive messages → Shutdown",
+      "Create callback → Shutdown → Initialize ROS 2",
+      "Spin → Create node → Shutdown",
+      "Receive messages → Create node → Initialize ROS 2"
+    ],
+    "correct": 0,
+    "explanation": "This is the complete lifecycle of a basic ROS 2 subscriber."
+  }
+]
