@@ -218,5 +218,115 @@
     ],
     "correct": 0,
     "explanation": "This is the complete lifecycle of a basic ROS 2 subscriber."
+  },
+  {
+    "q": "What is the main purpose of a basic ROS 2 publisher program?",
+    "answers": [
+      "Send messages to a topic",
+      "Receive messages from a topic",
+      "Compile ROS 2",
+      "Create a robot"
+    ],
+    "correct": 0,
+    "explanation": "The program creates a publisher, so its job is to send messages to the 'chatter' topic."
+  },
+  {
+    "q": "Why does SimplePublisher inherit from rclcpp::Node?",
+    "answers": [
+      "To become a ROS 2 node with ROS features",
+      "To subscribe to topics automatically",
+      "To increase program speed",
+      "To create topics automatically"
+    ],
+    "correct": 0,
+    "explanation": "A ROS 2 node provides functions like create_publisher(), get_logger(), and parameters."
+  },
+  {
+    "q": "What does create_publisher<std_msgs::msg::String>(\"chatter\", 10) do?",
+    "answers": [
+      "Registers this node as a publisher on the 'chatter' topic with a queue size of 10",
+      "Registers this node as a subscriber on the 'chatter' topic",
+      "Creates a timer",
+      "Creates a message"
+    ],
+    "correct": 0,
+    "explanation": "It tells ROS 2 this node will publish String messages on 'chatter', buffering up to 10 if needed."
+  },
+  {
+    "q": "Why does the publisher use a wall timer (create_wall_timer) instead of publishing once in the constructor?",
+    "answers": [
+      "To publish messages repeatedly at a fixed interval",
+      "To subscribe to a topic",
+      "To shut down ROS 2",
+      "To increase the queue size"
+    ],
+    "correct": 0,
+    "explanation": "A timer triggers the callback on a schedule so messages are sent continuously while the node runs."
+  },
+  {
+    "q": "What does std::bind(&SimplePublisher::timerCallback, this) do?",
+    "answers": [
+      "Connects the timer to the timerCallback member function on this object",
+      "Creates a new topic",
+      "Publishes a message immediately",
+      "Stops the timer"
+    ],
+    "correct": 0,
+    "explanation": "ROS 2 needs to know which function to call and which object instance owns it."
+  },
+  {
+    "q": "What happens each time the wall timer fires?",
+    "answers": [
+      "timerCallback() runs and publishes a new message",
+      "The node shuts down",
+      "A new node is created",
+      "The queue size increases"
+    ],
+    "correct": 0,
+    "explanation": "The timer's callback is executed on each interval, and that callback publishes the message."
+  },
+  {
+    "q": "Why is the publisher stored in a member variable like pub_ instead of a local variable?",
+    "answers": [
+      "To keep the publisher alive for the lifetime of the node",
+      "To make publishing faster",
+      "To store received messages",
+      "To create additional topics"
+    ],
+    "correct": 0,
+    "explanation": "If it were a local variable, it would be destroyed after the constructor and publishing would fail."
+  },
+  {
+    "q": "What does msg.data = \"Hello, world! \" + std::to_string(count_++) do?",
+    "answers": [
+      "Builds the string payload for the outgoing message and increments a counter",
+      "Reads an incoming message",
+      "Creates a subscription",
+      "Publishes the message"
+    ],
+    "correct": 0,
+    "explanation": "It assigns the message content before publishing and tracks how many messages have been sent."
+  },
+  {
+    "q": "What is the effect of calling pub_->publish(msg)?",
+    "answers": [
+      "Sends the message to all current subscribers of the topic",
+      "Receives a message from the topic",
+      "Creates the publisher",
+      "Stops the timer"
+    ],
+    "correct": 0,
+    "explanation": "publish() sends the message out on the topic to any subscribers listening at that moment."
+  },
+  {
+    "q": "Why must a publisher and its subscribers agree on the message type, such as std_msgs::msg::String?",
+    "answers": [
+      "ROS 2 requires publishers and subscribers on a topic to use the same message type to communicate",
+      "It determines the topic name",
+      "It sets the queue size",
+      "It names the node"
+    ],
+    "correct": 0,
+    "explanation": "Topics are typed channels; a mismatched message type prevents communication between nodes."
   }
 ]
