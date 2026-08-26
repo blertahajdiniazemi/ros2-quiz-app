@@ -60,12 +60,26 @@
      interface, not merely larger text. */
   :root{
     --u: min(1rem, 100dvh / 49, 100vw / 63);
-    --scene-u: 60;                    /* render width, in --u */
+    --frame-u: 60;                    /* frame width, in --u */
+
+    /* ── THE ONE WIDTH ──────────────────────────────────────────
+       The render and the branch list are the same column, so they
+       take their width from a single declaration rather than from
+       two calculations that have to be kept in agreement. Both
+       elements are children of .zone-wrap, so the 100% term resolves
+       against the same containing block for each of them and the two
+       edges land on the same pixel — at any window size and at any
+       browser zoom, because neither element can be measured
+       independently of the other.
+
+       Changing --frame-u below (the breakpoints do) moves both edges
+       together; there is no second place to update. */
+    --frame-w: min(100%, calc(var(--u) * var(--frame-u)));
   }
 
   .zone-scene{
     position:relative; flex:0 0 auto;
-    width:min(100%, calc(var(--u) * 90), calc(var(--u) * var(--scene-u)));
+    width:var(--frame-w);
     margin:0 auto;
     aspect-ratio:1024/576; overflow:hidden; background:#02070b;
     border:1px solid rgba(156,183,198,.24);
@@ -76,7 +90,7 @@
        can be sized in cqw — hundredths of the rendered building's own
        width. That keeps the status panel and the lift cabs locked to the
        building even in the cases where the render ends up narrower than
-       60u because the window, and not --u, is what limited it. The
+       the frame width because the window, not --u, limited it. The
        overlays already work this way: the SVG carries a 1024×576 viewBox
        and the lift cars are positioned in percentages, so both are in
        building coordinates and stay registered by construction. */
@@ -111,7 +125,7 @@
   /* ── THE ONLY SCROLLING REGION ────────────────────────────────── */
   .zone-branches{
     flex:1 1 auto; min-height:0;
-    width:min(100%, calc(var(--u) * 90)); margin:0 auto;
+    width:var(--frame-w); margin:0 auto;   /* identical to the render, by construction */
     border:1px solid var(--line-strong);background:var(--line);
     overflow-y:auto; overflow-x:hidden;
     overscroll-behavior:contain;
@@ -167,19 +181,19 @@
      same guarantee, at a different scale. */
   @media (max-width:1024px){
     /* a tablet has less height to spare, so the render gives some back */
-    :root{ --u: min(1rem, 100dvh / 46, 100vw / 52); --scene-u:48 }
+    :root{ --u: min(1rem, 100dvh / 46, 100vw / 52); --frame-u:48 }
   }
   @media (max-width:760px){
     /* one column. The render goes as wide as the screen allows, so its
        width no longer sets the budget and --u answers to legibility. */
-    :root{ --u: min(1rem, 100vw / 25); --scene-u:60 }
+    :root{ --u: min(1rem, 100vw / 25); --frame-u:60 }
     .zone-wrap{padding:calc(var(--u) * .6); gap:calc(var(--u) * .6)}
     .zone-branches__head{align-items:flex-start;flex-direction:column;gap:calc(var(--u) * .25)}
     .zone-branches__grid{grid-template-columns:1fr}
   }
   /* short landscape windows: keep the list usable */
-  @media (max-height:560px){ :root{ --u: min(1rem, 100dvh / 44, 100vw / 57); --scene-u:54 } }
-  @media (max-height:420px){ :root{ --u: min(1rem, 100dvh / 40, 100vw / 51); --scene-u:48 } }
+  @media (max-height:560px){ :root{ --u: min(1rem, 100dvh / 44, 100vw / 57); --frame-u:54 } }
+  @media (max-height:420px){ :root{ --u: min(1rem, 100dvh / 40, 100vw / 51); --frame-u:48 } }
 
   /* ═══════════════════════════════════════════════════════════
      ANIMATION LAYER — added enhancement
